@@ -25,6 +25,7 @@ const createAndSavePerson = (person, done) => {
   person.save((err, data) => {
     if (err) {
       console.error(err);
+      return;
     } else {
       done(null, data);
     }
@@ -35,8 +36,19 @@ const createManyPeople = (arrayOfPeople, done) => {
   Person.create(arrayOfPeople, (err, data) => {
     if (err) {
       console.error(err);
+      return;
     }
     done(null, data)
+  });
+};
+
+const findPeopleByName = async (personName, done) => {
+  Person.find({name: personName}).exec((err, data) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    done(null, data);
   });
 };
 
